@@ -17,6 +17,4 @@ which is like a simple version of `:marks` for files
 
 ## TODO
 - make completion filter by what's already been typed
-- consider user's `wildmenu` and `wildcharm` for mappings
-- don't set `wildcharm`
 - haven't actually tested when there's no marks available

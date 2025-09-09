@@ -3,11 +3,8 @@ if exists("g:loaded_marcos") || &cp
 endif
 let g:loaded_marcos = 1
 
-" TODO maybe there's a better way to start completion
-set wildcharm=<Tab>
-
 silent! nnoremap <unique> m<Tab> :Marcos<CR>
-silent! nnoremap <unique> '<Tab> :Marcos <Tab>
+silent! nnoremap <unique> <expr> '<Tab> feedkeys(':Marcos '..nr2char(&wc), 't')
 silent! nnoremap <unique> dm :Marks<CR>:delmarks<Space>
 
 command -nargs=? -complete=customlist,s:complete Marcos call s:marcos(<q-args>)
