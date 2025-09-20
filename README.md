@@ -17,3 +17,4 @@ which is like a simple version of `:marks` for files
 
 ## TODO
 - haven't actually tested when there's no marks available
+- don't allow marking terminal buffers, help pages, etc.
