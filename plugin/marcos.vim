@@ -4,7 +4,7 @@ endif
 let g:loaded_marcos = 1
 
 silent! nnoremap <unique> m<Tab> :Marcos<CR>
-silent! nnoremap <unique> <expr> '<Tab> feedkeys(':Marcos '..nr2char(&wc), 't')
+silent! nnoremap <unique> '<Tab> :Marcos <C-D>
 silent! nnoremap <unique> dm :Marks<CR>:delmarks<Space>
 
 command -nargs=? -complete=customlist,s:complete Marcos call s:marcos(<q-args>)
@@ -39,8 +39,8 @@ function s:set_mark()
 		return
 	endif
 
+	execute 'mark' mark
 	echo 'm'..mark
-	execute 'normal! m'..mark
 endfunction
 
 function s:jump_to_mark(file)
@@ -51,8 +51,7 @@ function s:jump_to_mark(file)
 		return
 	endif
 
-	echo "'"..mark
-	execute "normal! '"..mark
+	execute "'"..mark
 endfunction
 
 function s:get_unused_mark_for(file)
@@ -85,11 +84,12 @@ function s:file_marks()
 	return getmarklist()->filter('v:val.mark =~# "[A-Z]$"')
 endfunction
 
-" :help :command-completion-custom
+" :help :command-completion-customlist
 function s:complete(a,l,p)
 	return s:file_marks()
 		\->sort(function('s:sort_by_lastused'))
 		\->map({k,v -> fnamemodify(v.file, ':~:.')})
+		\->filter({i,v -> stridx(v, a:a) >= 0})
 endfunction
 
 " a == b: 0
