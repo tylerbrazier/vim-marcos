@@ -10,6 +10,6 @@ That's it.
 
 Under the hood, the mappings are running the command `:Marcos`
 which, without an argument, marks the current file (`m<Tab>`);
-if the argument is a file mark or file name, it jumps there (`'<Tab>`).
+if the argument starts with a letter, it jumps to that file mark (`'<Tab>`).
 The plugin also defines `:Marks`
 which is like a simple version of `:marks` for files (`dm` uses that).
