@@ -10,6 +10,8 @@ silent! nnoremap <unique> dm :Marks<CR>:delmarks<Space>
 command -nargs=? -complete=customlist,s:complete Marcos call s:marcos(<q-args>)
 command Marks call s:marks()
 
+" Without an argument, mark the current file;
+" otherwise, use the first letter of the argument as the file mark to jump to
 function s:marcos(str)
 	if empty(a:str)
 		call s:set_mark()
@@ -23,6 +25,7 @@ function s:marcos(str)
 	endif
 endfunction
 
+" like :marks but limited to file marks and without the extra details
 function s:marks()
 	echo s:file_marks()
 		\->map({k,v -> v.mark[1]..' '..fnamemodify(v.file, ':~:.')})

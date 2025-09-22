@@ -6,10 +6,5 @@ Easier file marks management so you don't have to fuss with the letters.
 - `'<Tab>` prompt with completion to jump to a marked file
 - `dm` for `:delmarks` with a list of file marks
 
-That's it.
-
-Under the hood, the mappings are running the command `:Marcos`
-which, without an argument, marks the current file (`m<Tab>`);
-if the argument starts with a letter, it jumps to that file mark (`'<Tab>`).
-The plugin also defines `:Marks`
-which is like a simple version of `:marks` for files (`dm` uses that).
+That's it. Under the hood, the script defines commands `:Marcos` and `:Marks`
+which the mappings make use of. Read the code if you care to know they work.
