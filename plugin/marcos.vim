@@ -35,7 +35,7 @@ function s:set_mark()
 	let mark = s:get_existing_mark_for(f) ?? s:get_unused_mark_for(f)
 
 	if empty(mark)
-		echo 'No unused file marks left; time to :delmarks'
+		echo 'No unused file marks left; time to :delmarks (dm)'
 		return
 	endif
 
