@@ -1,6 +1,6 @@
 # vim-marcos
 
-Easier file marks management.
+Easier file marks management so you don't have to fuss with the letters.
 
 - `m<Tab>` marks the current file with an unused upper case mark
 - `'<Tab>` prompt with completion to jump to a marked file
@@ -9,11 +9,7 @@ Easier file marks management.
 That's it.
 
 Under the hood, the mappings are running the command `:Marcos`
-which marks the current file if not given an argument,
-or jumps to the file name argument if given one.
+which, without an argument, marks the current file (`m<Tab>`);
+if the argument is a file mark or file name, it jumps there (`'<Tab>`).
 The plugin also defines `:Marks`
-which is like a simple version of `:marks` for files
-(`dm` uses that).
-
-## TODO
-- don't allow marking terminal buffers, help pages, etc.
+which is like a simple version of `:marks` for files (`dm` uses that).

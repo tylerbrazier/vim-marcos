@@ -10,11 +10,21 @@ silent! nnoremap <unique> dm :Marks<CR>:delmarks<Space>
 command -nargs=? -complete=customlist,s:complete Marcos call s:marcos(<q-args>)
 command Marks call s:marks()
 
-function s:marcos(file)
-	if empty(a:file)
+" target arg can be any of
+" - a file name to jump to
+" - X:file_name.txt (where X is a mark to jump to)
+" - X (a mark to jump to)
+" - (empty) in this case, mark the current file instead of jumping
+function s:marcos(target)
+	if empty(a:target)
 		call s:set_mark()
 	else
-		call s:jump_to_mark(fnamemodify(a:file, ':p'))
+		let mark = matchstr(a:target, '^[A-Z]\(:\|$\)')[0]
+		if empty(mark)
+			call s:jump_to_file(fnamemodify(a:target, ':p'))
+		else
+			execute "'"..mark
+		endif
 	endif
 endfunction
 
@@ -43,7 +53,7 @@ function s:set_mark()
 	echo 'm'..mark
 endfunction
 
-function s:jump_to_mark(file)
+function s:jump_to_file(file)
 	let mark = s:get_existing_mark_for(a:file)
 
 	if empty(mark)
@@ -88,7 +98,7 @@ endfunction
 function s:complete(a,l,p)
 	return s:file_marks()
 		\->sort(function('s:sort_by_lastused'))
-		\->map({k,v -> fnamemodify(v.file, ':~:.')})
+		\->map({k,v -> v.mark[1]..':'..fnamemodify(v.file, ':~:.')})
 		\->filter({i,v -> stridx(v, a:a) >= 0})
 endfunction
 
